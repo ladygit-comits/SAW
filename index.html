@@ -259,7 +259,7 @@ var a=document.createElement("a");a.href="mailto:"+TO+"?subject="+encodeURICompo
 showToast("Thank you!","Your email app has opened with your message ready. Press Send to complete it.");b.disabled=false;b.textContent="Send message"}
 fetch("https://formsubmit.co/ajax/"+TO,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(pay)}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){if(j&&(j.success===false||j.success==="false"))throw 0;done()}).catch(fb)});
 </script>
-  <div class="container copyright text-center mt-4">
+ <div class="container copyright text-center mt-4">
     <p>© <span id="current-year"></span> Kavanda. All Rights Reserved.</p>
 </div>
 
