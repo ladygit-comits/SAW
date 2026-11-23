@@ -260,6 +260,93 @@ var a=document.createElement("a");a.href="mailto:"+TO+"?subject="+encodeURICompo
 showToast("Thank you!","Your email app has opened with your message ready. Press Send to complete it.");b.disabled=false;b.textContent="Send message"}
 fetch("https://formsubmit.co/ajax/"+TO,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(pay)}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){if(j&&(j.success===false||j.success==="false"))throw 0;done()}).catch(fb)});
 </script>
+<!-- ===== Under-construction notice for unpublished store page ===== -->
+<script>
+(function () {
+  // Add any other unfinished page paths here (partial matches are fine)
+  var BLOCKED = [
+    'lynx-vuvuzela-mk9t.squarespace.com/store/p/aquatic-animal-welfare-initiative'
+  ];
 
+  var modal, lastFocus;
+
+  function build() {
+    modal = document.createElement('div');
+    modal.id = 'ucModal';
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-labelledby', 'ucTitle');
+    modal.style.cssText =
+      'position:fixed;inset:0;z-index:200;display:none;place-items:center;padding:22px;' +
+      'background:color-mix(in srgb, var(--g) 70%, transparent);' +
+      'backdrop-filter:blur(6px)';
+
+    modal.innerHTML =
+      '<div style="max-width:480px;width:100%;background:var(--card);color:var(--ink);' +
+        'border:1px solid var(--line);border-radius:24px;padding:38px 34px;text-align:center;' +
+        'box-shadow:0 32px 80px rgba(0,0,0,.28);font-family:Inter,system-ui,sans-serif">' +
+
+        '<div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:22px">' +
+          '<span style="width:44px;height:44px;border-radius:50%;background:var(--s);display:grid;place-items:center;flex:none">' +
+            '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--g)">' +
+              '<path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>' +
+            '</svg>' +
+          '</span>' +
+          '<span style="font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--mut)">SAW</span>' +
+        '</div>' +
+
+        '<h3 id="ucTitle" style="font-family:Fraunces,Georgia,serif;font-size:1.65rem;line-height:1.2;margin:0 0 14px;color:var(--ink)">' +
+          'Page coming soon' +
+        '</h3>' +
+
+        '<p style="margin:0 0 28px;color:var(--mut);font-size:.97rem;line-height:1.65">' +
+          'We\u2019re putting the finishing touches on this page. Please check back soon \u2014 thank you for your patience.' +
+        '</p>' +
+
+        '<button type="button" id="ucClose" class="btn dk" style="min-width:160px;font-size:.95rem">Got it</button>' +
+
+        '<div style="margin-top:26px;padding-top:18px;border-top:1px solid var(--line);font-size:.8rem;color:var(--mut)">' +
+          'In the meantime, you can <a href="#home" style="color:var(--g);font-weight:600;text-decoration:underline" onclick="document.getElementById(\'ucClose\').click()">return to the homepage</a>.' +
+        '</div>' +
+      '</div>';
+
+    document.body.appendChild(modal);
+
+    modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
+    modal.querySelector('#ucClose').addEventListener('click', close);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && modal.style.display === 'grid') close();
+    });
+  }
+
+  function open() {
+    if (!modal) build();
+    lastFocus = document.activeElement;
+    modal.style.display = 'grid';
+    document.body.style.overflow = 'hidden';
+    modal.querySelector('#ucClose').focus();
+  }
+
+  function close() {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    for (var i = 0; i < BLOCKED.length; i++) {
+      if (href.indexOf(BLOCKED[i]) !== -1) {
+        e.preventDefault();
+        open();
+        return;
+      }
+    }
+  });
+})();
+</script>
+<!-- ===== End under-construction notice ===== -->
 </body>
 </html>
