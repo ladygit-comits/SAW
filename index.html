@@ -260,12 +260,13 @@ var a=document.createElement("a");a.href="mailto:"+TO+"?subject="+encodeURICompo
 showToast("Thank you!","Your email app has opened with your message ready. Press Send to complete it.");b.disabled=false;b.textContent="Send message"}
 fetch("https://formsubmit.co/ajax/"+TO,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(pay)}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){if(j&&(j.success===false||j.success==="false"))throw 0;done()}).catch(fb)});
 </script>
-<!-- ===== Under-construction notice for unpublished store page ===== -->
+<!-- ===== Under-construction notice for unpublished store pages ===== -->
 <script>
 (function () {
-  // Add any other unfinished page paths here (partial matches are fine)
+  // Block any link pointing to the private Squarespace store.
+  // Add more domains/paths here if needed.
   var BLOCKED = [
-    'lynx-vuvuzela-mk9t.squarespace.com/store/p/aquatic-animal-welfare-initiative'
+    'lynx-vuvuzela-mk9t.squarespace.com'
   ];
 
   var modal, lastFocus;
